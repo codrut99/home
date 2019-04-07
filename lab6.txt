@@ -1,0 +1,81 @@
+1.(defun dig (n) (cond ((zerop n) ())  (( oddp (mod n 10)) (append (dig (floor(/ n 10))   ) (list (mod n 10)) ) )(t (dig (floor (/ n 10))))  ))
+->(dig 23432)
+
+(3 3 )
+
+
+
+->(dig 1223456)
+(1 3 5)
+
+
+
+
+2.
+ (defun inter (lst1 lst2) (cond  ((null lst2) ()) (t (append (append (list (car lst1)) (list(car lst2))) (inter (cdr lst1) (cdr lst2))))))
+
+
+> (inter '(2 3 54) '( 4 6 7))
+
+(2 4 3 6 54 7)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.(defun lung (lst) (cond ((null lst) ()) ((atom (car lst)) (lung (cdr lst) )) (t (append (list (length (car lst))) ( lung (cdr lst))))))
+
+->(lung '(3 5 (4 3  4)))
+
+(3)
+
+->(lung '(3 4 5))
+nill
+
+4.( defun functie (l nr n)  (cond(  (null l)  nil ) ( (= ( mod n  nr) 0) 
+  (append(list (car l)(car l)) (functie (cdr l) nr (+ n 1)))) ( t ( cons (car l) (functie (cdr l) nr (+ n 1)))))) 
+
+(defun dubleza (l nr) (functie l nr 1))
+
+->(dubleaza '(1 2 3 4 5) 2)
+(1 2 2 3 4 4 5)
+
+->(dubleaza '(3 4 5 6 7 8) 3)
+(3 4 5 5 6 7 8  8)
+
+
+5.reuniunea:
+> (defun reuniune (x y) (cond ((null x) y) ((member (car x) y) (reuniune (cdr x) y)) (t (cons (car x) (reuniune (cdr x) y)))))
+REUNIUNE
+> (reuniune '(1 2 3) '(4 5))
+(1 2 3 4 5)
+
+intersectia:
+(defun intersectie ( l1 l2)   ( do (   ( pr   l1  (cdr pr)) (res '()))    ( (null pr) res ) ( cond ( ( member (car pr) l2) (setq res (append res  (list (car pr))))))))
+INTERSECTIE
+(intersectie '(1 2 3 4 5) '( 1 2 3 4 5))
+(1 2 3 4 5)
+(intersectie '(1 2 3 4 5) '( 9 7 4 1 0))
+(1 4)
+
+diferenta:
+> (defun diferenta(x y)(cond ((null x) NIL)((member (car x) y)(diferenta(cdr x)y))((cons(car x)(diferenta(cdr x)y)))))
+DIFERENTA
+> (diferenta '(3 4 5 2 9 ) '(1 2))
+(3 4 5 9)
+
+egalitatea:
+> (defun egalitate (x y) (cond ((null x) NIL)((member (car x) y) T)((egalitate (cdr x)y))))
+EGALITATE
+> (egalitate '(7 8 4 2) '(8 7 4 2))
+T
