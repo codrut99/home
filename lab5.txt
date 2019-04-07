@@ -1,0 +1,70 @@
+1.(defun count-atoms(L)    (cond     ((null l) 0)   ((atom l) 1)    (t (+ (count-atoms (car l))            (count-atoms (cdr l))))))
+->(setq l2 '( (5 6(6 7))5 6 8(s 4 6 7(5 6))))
+->(count-atoms l2 )
+->13
+
+(defun countatoms(list ac) (cond (( null list) ac) (t (countatoms (cdr list) (+ ac 1)))))
+
+2.(defun rot_left (list n )  (cond ((zerop n) list) 
+  (t (append (rot_left (append  (reverse (nthcdr (+(- (length list) n) 1) (reverse list))) 
+   (nthcdr n list)) (- n 1) ) (list (nth (- n 1) list))  ))) 
+ )
+->(setq l '(a b c d e))
+->(rot_left l 1)
+(B C D E A)
+->(rl l 3)
+(D E A B C)
+
+(defun rot_right (list n )  (cond ((zerop n) list) 
+  (t (append (list (nth (- n 1)(reverse list))) (rot_right (append (reverse (nthcdr n (reverse list))) 
+    (nthcdr (+(- (length list) n) 1)  list)) 
+    (- n 1) )   ))) 
+  )
+
+->(rot_right l 2)
+(D E A B C)
+
+
+3.(defun fara_dubluri (L) 
+   (cond ((null L) L) 
+         ((member (car L) (cdr L)) 
+          (fara_dubluri (cdr L))) 
+     (t (cons (car L) (fara_dubluri (cdr L))))))
+->(setq l '(a b a c c))
+->(fara_dubluri l)
+(b a c)
+
+4.(defun presentp (L n) 
+   (cond 
+    ((null L) nil) 
+    ((equal n (car L)) t) 
+    ((listp (car L))              
+     (or (presentp (car L) n)   
+         (presentp (cdr L) n) )) 
+    ((presentp (cdr L) n))) 
+   )
+
+(setq l '(((a)) f c))
+->(deep-find l 'a)
+T
+
+5.(defun dig (n) (cond ((zerop n) ()) (t (append (dig (floor(/ n 10))   ) (list (mod n 10)) ))))
+->(dig 1234)
+(1 2 3 4)
+
+6.(defun pozpar (lst) (do((c 1 (+ c 2)) (l lst ) (x '() )) ( (or (= c (length l))  
+(= c (+ (length l) 1))) x )(setq x (append x (list( nth c l)) ))))
+
+->(pozpar '(3 4 5 7 8))
+(4 7)
+(setq l '(a b c  d e f g h))
+(A B C D E F G H)
+ ->(pozpar l)
+(B D F H)
+
+7.(defun gc(m n) (do( (a 1 (+ a 1) )(x m) (y n)  (g 1 (if (and (= (mod x a) 0) (= (mod y a) 0)) (setq g a) g  ))) 
+ ((= a  (+ x 1)) g)  ))
+->(gc 42 6)
+6
+->(gc 2 2)
+2
